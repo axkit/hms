@@ -1,2 +1,9 @@
 # hms
-Golang type to handle HHMMSS and HHMM as string
+
+Golang types handling Year/Month, Hour:Min:Sec, Hour:Min data.
+
+## Types
+
+YYYYMM
+HHMMSS
+HHMM

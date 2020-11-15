@@ -66,6 +66,53 @@ func (h HHMM) String() string {
 	return string(h)
 }
 
+func (h HHMM) Valid() bool {
+	return len(h) == 5
+}
+
+type HM struct {
+	d time.Duration
+}
+
+func (hm HM) Add(hours, minutes int) HM {
+	n := hm.d + time.Duration(hours)*time.Hour + time.Duration(minutes)*time.Minute
+	return HM{d: n.Truncate(time.Minute) % (24 * time.Hour)}
+}
+
+// Hours returns hours.
+func (hm HM) Hours() int {
+	return int(hm.d / time.Hour)
+}
+
+// Minutes returns minutes.
+func (hm HM) Minutes() int {
+	return int(hm.d % time.Hour / time.Minute)
+}
+
+// String returns string as HH:MM
+func (hm HM) String() string {
+	return fmt.Sprintf("%02d:%02d", hm.Hours(), hm.Minutes())
+}
+
+// Duration returns value as time.Duration.
+func (hm HM) Duration() time.Duration {
+	return hm.d
+}
+
+// Before returns true if less then x.
+func (hm HM) Before(x HM) bool {
+	return hm.d < x.d
+}
+
+// Interval returns time interval between two values.
+func (hm HM) Interval(x HM) HM {
+	res := hm.d - x.d
+	if res < 0 {
+		res *= -1
+	}
+	return HM{d: res}
+}
+
 // HHMM описывает строковой тип который содержит Часы:Минуты в формате ЧЧ:ММ.
 type HHMM string
 
@@ -118,6 +165,12 @@ func (h HHMM) Duration(x HHMM) (int, error) {
 	}
 
 	return xd - hd, nil
+}
+
+func (h HHMM) MidnightOffset() time.Duration {
+	hh, _ := h.Hour()
+	hm, _ := h.Minute()
+	return time.Duration(hh)*time.Hour + time.Duration(hm)*time.Minute
 }
 
 func (h HHMM) Before(x HHMM) bool {
