@@ -3,7 +3,7 @@
 [![Build Status](https://github.com/axkit/bitset/actions/workflows/go.yml/badge.svg)](https://github.com/axkit/hms/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/axkit/hms)](https://goreportcard.com/report/github.com/axkit/hms)
 [![GoDoc](https://pkg.go.dev/badge/github.com/axkit/hms)](https://pkg.go.dev/github.com/axkit/hms)
-[![Coverage Status](https://coveralls.io/repos/github/axkit/hms/badge.svg?branch=main)](https://coveralls.io/github/axkit/hms?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/axkit/hms/badge.svg?branch=master)](https://coveralls.io/github/axkit/hms?branch=master)
 
 The `hms` package provides a simple time handling within a day.  
 
